@@ -1,0 +1,39 @@
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* S'assure que la modal apparaît au-dessus des autres éléments */
+}
+
+.Inscription {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Organise les enfants verticalement */
+}
+
+.Inscription label {
+    margin-bottom: 10px; /* Espacement entre les labels */
+}
+
+.Inscription input,
+.Inscription button {
+    width: 100%; /* Assure que les entrées et les boutons remplissent l'espace */
+    padding: 8px; /* Padding pour les entrées et les boutons */
+    margin-bottom: 20px; /* Espacement après chaque entrée */
+    box-sizing: border-box; /* Le padding et la bordure sont inclus dans la largeur */
+}
+
+.Inscription form {
+    width: 100%; /* Assure que le formulaire utilise toute la largeur de la modal */
+}

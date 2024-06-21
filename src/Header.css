@@ -1,0 +1,270 @@
+/* App.css */
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.App-main {
+  padding: 20px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.Annonce h2 {
+  margin-top: 0;
+}
+
+.icon-preter {
+  border: 1px solid whitesmoke;
+  border-radius: 50px;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #0056b3;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #007bff;
+}
+
+#ajouter {
+  margin-left: 20px;
+}
+
+.rechercher {
+  margin-left: 20px;
+  width: 50%;
+}
+
+.categorie {
+  float: left;
+  width: 100%;
+}
+
+.categorie button {
+  width: 19%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.categorie-maison,
+.categorie-voiture,
+.categorie-electronique,
+.categorie-loisirs,
+.categorie-autre {
+  width: 70%;
+  background-color: #f0f0f0;
+  display: flex;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 50px;
+  position: absolute;
+  z-index: 2;
+}
+
+.categorie-maison button,
+.categorie-voiture button,
+.categorie-electronique button,
+.categorie-loisirs button,
+.categorie-autre button {
+  display: inline-block;
+  width: auto;
+  min-width: 16%;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.categorie-maison button:hover,
+.categorie-voiture button:hover,
+.categorie-electronique button:hover,
+.categorie-loisirs button:hover,
+.categorie-autre button:hover {
+  background-color: #0056b3;
+}
+
+.categorie-maison button:nth-child(5n),
+.categorie-voiture button:nth-child(5n),
+.categorie-electronique button:nth-child(5n),
+.categorie-loisirs button:nth-child(5n),
+.categorie-autre button:nth-child(5n) {
+  margin-right: 0;
+}
+
+.categorie-maison div,
+.categorie-voiture div,
+.categorie-electronique div,
+.categorie-loisirs div,
+.categorie-autre div {
+  float: left;
+}
+
+.icon-sous-categorie {
+  background-color: #0056b3;
+  color: white;
+  border: 1px solid whitesmoke;
+  border-radius: 50px;
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
+
+.sous-categorie {
+  display: flex;
+  justify-content: center;
+}
+
+/* Media Queries for Responsive Design */
+
+@media (max-width: 1024px) {
+  .App-header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .rechercher {
+    width: 70%;
+    margin-left: 0;
+  }
+
+  .categorie button {
+    width: 23%;
+  }
+
+  .categorie-maison button,
+  .categorie-voiture button,
+  .categorie-electronique button,
+  .categorie-loisirs button,
+  .categorie-autre button {
+    min-width: 20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .App-header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .rechercher {
+    width: 80%;
+    margin-left: 0;
+  }
+
+  .categorie button {
+    width: 30%;
+  }
+
+  .categorie-maison,
+  .categorie-voiture,
+  .categorie-electronique,
+  .categorie-loisirs,
+  .categorie-autre {
+    width: 90%;
+    flex-direction: column;
+    padding-right: 10px;
+    left: 5%;
+    transform: translateX(0);
+    position: relative;
+  }
+
+  .categorie-maison button,
+  .categorie-voiture button,
+  .categorie-electronique button,
+  .categorie-loisirs button,
+  .categorie-autre button {
+    min-width: 40%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .rechercher {
+    width: 90%;
+    margin-left: 0;
+  }
+
+  .categorie button {
+    width: 100%;
+  }
+
+  .categorie-maison,
+  .categorie-voiture,
+  .categorie-electronique,
+  .categorie-loisirs,
+  .categorie-autre {
+    width: 100%;
+    flex-direction: column;
+    padding: 5px;
+    left: 0;
+    transform: translateX(0);
+    position: relative;
+  }
+
+  .categorie-maison button,
+  .categorie-voiture button,
+  .categorie-electronique button,
+  .categorie-loisirs button,
+  .categorie-autre button {
+    min-width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .icon-preter,
+  .icon-sous-categorie {
+    width: 40px;
+    height: 40px;
+  }
+}

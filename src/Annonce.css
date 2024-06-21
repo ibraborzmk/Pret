@@ -1,0 +1,84 @@
+.annonce {
+    float: left;
+    width: 290px;
+    height: 400px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f8f8; /* Modification de la couleur de fond */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.text-container {
+    background-color: rgba(255, 255, 255, 0.7); /* Utilisation de la couleur semi-transparente */
+    padding: 5px;
+    border-radius: 10px;
+    font-size: smaller;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 20px);
+    margin: 5px;
+    padding: 5px;
+    width: 92%;
+        border-radius: 10px;
+    background-color: #f8f8f8; /* Modification de la couleur de fond */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-left: 1px;
+    font-size: smaller
+}
+
+#avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.user-details {
+    flex-grow: 1;
+}
+
+.user-name {
+    font-weight: bold;
+
+}
+
+#categorie {
+    font-style: italic;
+    border: 1px solid #ccc; /* Modification de la couleur de la bordure */
+    border-radius: 5px;
+    padding: 5px;
+    margin: 20px;
+    width: 53%;
+    /*Les élément doivenr être centrés*/
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+
+}
+#image-annonce {
+    width: 180px;
+    height: 200px;
+    margin-left: 50px;
+    border-radius: 2px;
+}
+
+.location {
+    font-style: italic;
+    font-size: smaller;
+    display: flex;
+}
+.description {
+    font-weight: bold;
+
+}
+#image-user {
+    width: 25px;
+    height: 25px;
+}
