@@ -23,13 +23,14 @@ const categories = {
     "Échappement",
     "Électronique",
   ],
-  Informatique: [
+  Électronique: [
+    "Informatique",
     "Télécommunications",
     "Composants électroniques",
     "Audiovisuel",
-    "Électronique grand public",
-    "Sécurité électronique",
-    "Énergie et alimentation",
+    "Electronique grand public",
+    "Sécurité éléctronique",
+    "Energie et alimentation",
   ],
   Loisirs: [
     "Jeux de société",

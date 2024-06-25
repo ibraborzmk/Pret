@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Pie, Line } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 
 const StatisticsComponent = () => {
   const [statistics, setStatistics] = useState(null);
-  const [annoncesville, setAnnoncesVille] = useState(null);
-  const [annoncesauthor, setAnnoncesAuthor] = useState(null);
+  const [annoncesVille, setAnnoncesVille] = useState(null);
+  const [annoncesAuthor, setAnnoncesAuthor] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:3001/statistiques/annonces/categorie')
@@ -33,7 +33,6 @@ const StatisticsComponent = () => {
     fetch('http://localhost:3001/statistiques/annonces/auteurs')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         setAnnoncesAuthor(data);
       })
       .catch(error => {
@@ -41,20 +40,25 @@ const StatisticsComponent = () => {
       });
   }, []);
 
-  if (!statistics || !annoncesville || !annoncesauthor) {
+  if (!statistics || !annoncesVille || !annoncesAuthor) {
     return <div>Chargement des statistiques...</div>;
   }
 
   const categories = statistics.map(item => item.category);
   const totals = statistics.map(item => item.total);
-  const cities = annoncesville.map(item => item.city);
-  const totalCity = annoncesville.map(item => item.total);
-  
-  const authors = annoncesauthor.map(item => item.author_idname); // Utilisation de author_idname au lieu de author
-  const totalAuthor = annoncesauthor.map(item => item.total);
+  const cities = annoncesVille.map(item => item.city);
+  const totalCity = annoncesVille.map(item => item.total);
 
-  //3 meilleurs auteurs
-  const barData = {
+  // Trier les auteurs par total d'annonces et ne garder que les 3 premiers
+  const topAuthors = [...annoncesAuthor]
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 3);
+
+  const authors = topAuthors.map(item => item.author_idname);
+  const totalAuthor = topAuthors.map(item => item.total);
+
+  // Données pour le graphique à barres des meilleurs auteurs
+  const barDataAuthors = {
     labels: authors,
     datasets: [
       {
@@ -63,14 +67,13 @@ const StatisticsComponent = () => {
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
           'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)'
+          'rgba(255, 206, 86, 0.6)'
         ]
       }
     ]
   };
+
+  // Données pour le graphique à secteurs des catégories
   const pieData = {
     labels: categories,
     datasets: [
@@ -89,15 +92,14 @@ const StatisticsComponent = () => {
     ]
   };
 
-  const lineData = {
+  // Données pour le graphique à colonnes des villes
+  const barDataCities = {
     labels: cities,
     datasets: [
       {
         label: 'Nombre d\'annonces par ville',
         data: totalCity,
-        fill: false,
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
+        backgroundColor: 'rgba(75, 192, 192, 0.6)'
       }
     ]
   };
@@ -106,13 +108,13 @@ const StatisticsComponent = () => {
     <div className="statistics-container">
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', gap: '20px', overflowX: 'auto' }}>
         <div className="chart">
-          <Bar data={barData} options={{ responsive: true }} />
+          <Bar data={barDataAuthors} options={{ responsive: true }} />
         </div>
         <div className="chart">
           <Pie data={pieData} options={{ responsive: true }} />
         </div>
         <div className="chart">
-          <Line data={lineData} options={{ responsive: true }} />
+          <Bar data={barDataCities} options={{ responsive: true }} />
         </div>
       </div>
     </div>

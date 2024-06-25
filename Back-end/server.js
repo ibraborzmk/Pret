@@ -6,13 +6,14 @@ const cors = require("cors");
 const app = express();
 
 
+
 app.use(cors());
 require("dotenv").config(); // Charge les variables d'environnement
 
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, '../public/uploads/');
     },
     filename: function(req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -351,6 +352,52 @@ app.get('/statistiques/annonces/auteurs', (req, res) => {
 }
 );
 
+//Recuperer l'id de la dernier conversation
+app.get('/conversations/last', (req, res) => {
+  const query = 'SELECT conversation_id FROM conversations ORDER BY conversation_id DESC LIMIT 1';
+  db.query(query, (err
+    , results) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).send('Erreur lors de la récupération de la dernière conversation');
+      }
+      res.json(results);
+  }
+  );
+}
+);
+
+// Crreez une nouvelle conversation
+app.post('/conversations', (req, res) => {
+  const { conversation_id, creator_idname, receiver_idname ,title} = req.body;
+  const query = 'INSERT INTO conversations (conversation_id, creator_idname, receiver_idname, title) VALUES (?, ?, ?, ?)';
+  conversation_id=conversation_id+1;
+  const query2 = 'INSERT INTO conversations (conversation_id, receiver_idname, creator_idname, creator_idname) VALUES (?, ?, ?, ?)';
+  db.query(query, [conversation_id, creator_idname, receiver_idname, title], (err, result) => {
+    if (err) {
+      console.error('Erreur lors de la création de la conversation:', err);
+      return res.status(500).send('Erreur lors de la création de la conversation');
+    }
+    res.status(201).json({ conversation_id, creator_idname, receiver_idname, title });
+  }
+  );
+}
+);
+
+// Creez un message dans une conversation
+app.post('/conversations/:conversationId/messages', (req, res) => {
+  const { conversationId } = req.params;
+  const { user_idname, user_dest_idname, message } = req.body;
+  const query = 'INSERT INTO messages (conversation_id, user_idname, user_dest_idname, message, sent_date) VALUES (?, ?, ?, ?, NOW())';
+  db.query(query, [conversationId, user_idname, user_dest_idname, message], (err, result) => {
+    if (err) {
+      console.error('Erreur lors de l\'envoi du message:', err);
+      return res.status(500).send('Erreur lors de l\'envoi du message');
+    }
+    res.status(201).json({ conversation_id: conversationId, user_idname, user_dest_idname, message });
+  });
+}
+);
 
 
 

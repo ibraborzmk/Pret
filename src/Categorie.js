@@ -57,7 +57,7 @@ function Categorie({ categorie, sousCategories, onClose }) {
                                 <p>User: {annonce.author_idname}</p>
                             </div>
                             <img 
-                                src={annonce.image || errorImage}
+                                src={'../public/'+annonce.image || errorImage}
                                 alt={annonce.title} 
                                 id="image-annonce" 
                                 onError={handleImageError}

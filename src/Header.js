@@ -14,7 +14,7 @@ import AjoutAnnonce from "./AjoutAnnonce.js";
 import Categorie from "./Categorie.js";
 import Inscription from "./Inscription.js";
 import Recherche from "./Recherche.js";
-import { AuthContext } from "./AuthContext"; // Importez le contexte d'authentification
+import { AuthContext } from "./AuthContext.js"; // Importez le contexte d'authentification
 
 
 let exportedUserId = null; 
@@ -349,7 +349,7 @@ function App() {
             <div className="buttons-loisirs">
               <button onClick={()=>toggleCategorie("Loisirs", "Jeux de société")}>Jeux de société</button>
               <button onClick={()=>toggleCategorie("Loisirs", "Jeux de balle")}> Jeux de balle</button>
-              <button onClick={()=>toggleCategorie("Loisirs" , "eux de boules")}>Jeux de boules</button>
+              <button onClick={()=>toggleCategorie("Loisirs" , "Jeux de boules")}>Jeux de boules</button>
               <button onClick={()=>toggleCategorie("Loisirs", "Jeux d'eaux")}>Jeux d'eaux</button>
               <button onClick={()=>toggleCategorie("Loisirs", "Jeux de construction")}>Jeux de construction</button>
               <button onClick={()=>toggleCategorie("Loisirs", "Jeux de réflexion")}>Jeux de réflexion</button>

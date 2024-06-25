@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS annonces (
     author_pp VARCHAR(255),
     published_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image VARCHAR(255),
+    disponible BOOLEAN DEFAULT 1,
     FOREIGN KEY (author_idname) REFERENCES users(idname) ON DELETE SET NULL
 );
 
@@ -129,65 +130,70 @@ INSERT INTO messages (conversation_id, user_idname, user_dest_idname, message) V
 
 
 
-INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, author_pp, image) VALUES 
-('Marteau', 'Marteau en très bon état', 10, 'Voiture' , 'Reparation de moteur' , 'Paris', '75001', 'rocky', 'rocky.jpg', 'marteau.jpg'),
-('Perceuse', 'Perceuse en très bon état', 50, 'Maison & Jardin' , 'Outils electrique' , 'Paris', '75001', 'creed', 'creed.jpg', 'perceuse.jpg'),
-('Scie', 'Scie en très bon état', 30, 'Maison & Jardin' , 'Outils electrique' , 'Paris', '75001', 'apollo', 'apollo.jpg', 'scie.jpg'),
-('Tournevis', 'Tournevis en très bon état', 5, 'Maison & Jardin' , 'Outils electrique' , 'Paris', '75001', 'drago', 'drago.jpg', 'tournevis.jpg');
+INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, author_pp,image,disponible) VALUES 
+('Pelle de jardin', 'Pelle robuste idéale pour le jardinage', 15.99, 'Maison & Jardin', 'Outils de plantation', 'Lyon', '69001', 'rocky', 'pelle.jpg',1),
+('Tondeuse à gazon', 'Tondeuse à gazon électrique, excellent état', 100.00, 'Maison & Jardin', 'Outils de jardinage', 'Marseille', '13001', 'apollo', 'tondeuse.jpg',1),
+('Taille-haie', 'Taille-haie électrique, excellent état', 50.00, 'Maison & Jardin', 'Outils de jardinage', 'Nice', '06000', 'creed', 'taillehaie.jpg',0),
+('Arrosoir', 'Arrosoir en plastique, excellent état', 10.00, 'Maison & Jardin', 'Outils de jardinage', 'Bordeaux', '33000', 'drago', 'arrosoir.jpg',1),
+('Aspirateur', 'Aspirateur sans sac, excellent état', 80.00, 'Maison & Jardin', 'Électroménager', 'Lille', '59000', 'rocky', 'aspirateur.jpg',0),
+('Tondeuse à cheveux', 'Tondeuse à cheveux professionnelle, excellent état', 30.00, 'Maison & Jardin', 'Soin personnel', 'Nantes', '44000', 'apollo', 'tondeusecheveux.jpg',1),
+('Cafetière', 'Cafetière électrique, excellent état', 20.00, 'Maison & Jardin', 'Électroménager', 'Strasbourg', '67000', 'creed', 'cafetiere.jpg',0),
+('Fer à repasser', 'Fer à repasser vapeur, excellent état', 40.00, 'Maison & Jardin', 'Électroménager', 'Paris', '75001', 'drago', 'fer.jpg',0);
 
 
 
 -- Annonces pour Maison & Jardin
-INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image) VALUES 
-('Pelle de jardin', 'Pelle robuste idéale pour le jardinage', 15.99, 'Maison & Jardin', 'Outils de plantation', 'Lyon', '69001', 'rocky', 'pelle.jpg'),
-('Sécateur', 'Sécateur haute performance pour tailler vos plantes', 20.00, 'Maison & Jardin', 'Outils de taille', 'Marseille', '13001', 'apollo', 'secateur.jpg'),
-('Tondeuse à gazon', 'Tondeuse électrique peu utilisée', 100.00, 'Maison & Jardin', 'Entretien du gazon', 'Nice', '06000', 'creed', 'tondeuse.jpg'),
-('Kit de peinture', 'Comprend rouleaux, pinceaux et plateau', 25.00, 'Maison & Jardin', 'Outils de peinture', 'Toulouse', '31000', 'drago', 'kitpeinture.jpg'),
-('Arrosoir', 'Arrosoir en plastique, 5 litres', 10.00, 'Maison & Jardin', 'Arrosage', 'Bordeaux', '33000', 'rocky', 'arrosoir.jpg'),
-('Tuyau d arrosage', 'Tuyau d arrosage de 20 mètres', 15.00, 'Maison & Jardin', 'Arrosage', 'Lille', '59000', 'apollo', 'tuyau.jpg'),
-('Engrais', 'Engrais pour plantes, 1 kg', 5.00, 'Maison & Jardin', 'Soins des plantes', 'Nantes', '44000', 'creed', 'engrais.jpg'),
-('Graines de fleurs', 'Paquet de graines de fleurs variées', 3.00, 'Maison & Jardin', 'Soins des plantes', 'Strasbourg', '67000', 'drago', 'graines.jpg');
+INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image, disponible) VALUES 
+('Pelle de jardin', 'Pelle robuste idéale pour le jardinage', 15.99, 'Maison & Jardin', 'Outils de plantation', 'Lyon', '69001', 'rocky', 'pelle.jpg',1),
+('Tondeuse à gazon', 'Tondeuse à gazon électrique, excellent état', 100.00, 'Maison & Jardin', 'Outils de jardinage', 'Marseille', '13001', 'apollo', 'tondeuse.jpg',1),
+('Taille-haie', 'Taille-haie électrique, excellent état', 50.00, 'Maison & Jardin', 'Outils de jardinage', 'Nice', '06000', 'creed', 'taillehaie.jpg',1),
+('Arrosoir', 'Arrosoir en plastique, excellent état', 10.00, 'Maison & Jardin', 'Outils de jardinage', 'Bordeaux', '33000', 'drago', 'arrosoir.jpg',1),
+('Aspirateur', 'Aspirateur sans sac, excellent état', 80.00, 'Maison & Jardin', 'Électroménager', 'Lille', '59000', 'rocky', 'aspirateur.jpg',1),
+('Tondeuse à cheveux', 'Tondeuse à cheveux professionnelle, excellent état', 30.00, 'Maison & Jardin', 'Soin personnel', 'Nantes', '44000', 'apollo', 'tondeusecheveux.jpg',1),
+('Cafetière', 'Cafetière électrique, excellent état', 20.00, 'Maison & Jardin', 'Électroménager', 'Strasbourg', '67000', 'creed', 'cafetiere.jpg',1),
+('Fer à repasser', 'Fer à repasser vapeur, excellent état', 40.00, 'Maison & Jardin', 'Électroménager', 'Paris', '75001', 'drago', 'fer.jpg',1);
 
 -- Annonces pour Voiture
-INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image) VALUES 
-('Kit d\'entretien voiture', 'Tout le nécessaire pour l\'entretien de votre voiture', 30.00, 'Voiture', 'Entretien général', 'Bordeaux', '33000', 'rocky', 'kitentretien.jpg'),
-('Moteur occasion', 'Moteur en bon état, peu servi', 250.00, 'Voiture', 'Réparation de moteur', 'Lille', '59000', 'apollo', 'moteur.jpg'),
-('Batterie auto', 'Batterie de voiture haute capacité', 70.00, 'Voiture', 'Systèmes électriques', 'Nantes', '44000', 'creed', 'batterie.jpg'),
-('Jeu de pneus hiver', 'Pneus hiver, excellent état, peu utilisés', 120.00, 'Voiture', 'Pneus et roues', 'Strasbourg', '67000', 'drago', 'pneushiver.jpg'),
-('Pare-chocs avant', 'Pare-chocs avant pour voiture de marque', 80.00, 'Voiture', 'Carrosserie', 'Paris', '75001', 'rocky', 'parechocs.jpg'),
-('Phares avant', 'Phares avant pour voiture de marque', 50.00, 'Voiture', 'Éclairage', 'Lyon', '69001', 'apollo', 'phares.jpg'),
-('Rétroviseur', 'Rétroviseur pour voiture de marque', 30.00, 'Voiture', 'Carrosserie', 'Marseille', '13001', 'creed', 'retroviseur.jpg'),
-('Siège auto', 'Siège auto pour enfant, excellent état', 40.00, 'Voiture', 'Intérieur', 'Toulouse', '31000', 'drago', 'siegeauto.jpg');
+INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image, disponible) VALUES 
+('Peugeot 208', 'Peugeot 208 en excellent état, faible kilométrage', 10000.00, 'Voiture', 'Citadine', 'Paris', '75001', 'rocky', 'peugeot.jpg',0),
+('Renault Clio', 'Renault Clio en excellent état, faible kilométrage', 8000.00, 'Voiture', 'Citadine', 'Lyon', '69001', 'apollo', 'clio.jpg',1),
+('Volkswagen Golf', 'Volkswagen Golf en excellent état, faible kilométrage', 12000.00, 'Voiture', 'Compacte', 'Marseille', '13001', 'creed', 'golf.jpg',1),
+('Audi A3', 'Audi A3 en excellent état, faible kilométrage', 15000.00, 'Voiture', 'Compacte', 'Nice', '06000', 'drago', 'audi.jpg',1),
+('BMW Serie 1', 'BMW Serie 1 en excellent état, faible kilométrage', 20000.00, 'Voiture', 'Compacte', 'Bordeaux', '33000', 'rocky', 'bmw.jpg',0),
+('Mercedes Classe A', 'Mercedes Classe A en excellent état, faible kilométrage', 25000.00, 'Voiture', 'Compacte', 'Lille', '59000', 'apollo', 'mercedes.jpg',1),
+('Toyota Yaris', 'Toyota Yaris en excellent état, faible kilométrage', 9000.00, 'Voiture', 'Citadine', 'Nantes', '44000', 'creed', 'yaris.jpg',1),
+('Ford Fiesta', 'Ford Fiesta en excellent état, faible kilométrage', 7000.00, 'Voiture', 'Citadine', 'Strasbourg', '67000', 'drago', 'fiesta.jpg',1);
 
 
 -- Annonces pour Électronique
-INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image) VALUES 
-('Ordinateur portable', 'Laptop performant et en bon état', 300.00, 'Électronique', 'Informatique', 'Paris', '75001', 'rocky', 'laptop.jpg'),
-('Téléphone débloqué', 'Smartphone dernier cri, comme neuf', 400.00, 'Électronique', 'Télécommunications', 'Lyon', '69001', 'apollo', 'smartphone.jpg'),
-('Carte électronique', 'Carte mère pour montage électronique', 50.00, 'Électronique', 'Composants électroniques', 'Marseille', '13001', 'creed', 'cartemere.jpg'),
-('Système home cinéma', 'Home cinéma pour une expérience audiovisuelle incroyable', 150.00, 'Électronique', 'Audiovisuel', 'Toulouse', '31000', 'drago', 'homecinema.jpg'),
-('Appareil photo', 'Appareil photo numérique, excellent état', 200.00, 'Électronique', 'Photographie', 'Nice', '06000', 'rocky', 'appareilphoto.jpg'),
-('Casque audio', 'Casque audio sans fil, excellent son', 100.00, 'Électronique', 'Audio', 'Bordeaux', '33000', 'apollo', 'casque.jpg'),
-('Enceinte Bluetooth', 'Enceinte Bluetooth portable, son puissant', 80.00, 'Électronique', 'Audio', 'Lille', '59000', 'creed', 'enceinte.jpg'),
-('Lecteur DVD', 'Lecteur DVD de salon, excellent état', 50.00, 'Électronique', 'Audiovisuel', 'Nantes', '44000', 'drago', 'lecteurdvd.jpg');
+INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image, disponible) VALUES 
+('iPhone 12', 'iPhone 12 en excellent état, 128 Go', 800.00, 'Électronique', 'Téléphone', 'Paris', '75001', 'rocky', 'iphone.jpg',1),
+('Samsung Galaxy S21', 'Samsung Galaxy S21 en excellent état, 128 Go', 700.00, 'Électronique', 'Téléphone', 'Lyon', '69001', 'apollo', 'samsung.jpg',1),
+('MacBook Pro', 'MacBook Pro en excellent état, 256 Go', 1500.00, 'Électronique', 'Ordinateur', 'Marseille', '13001', 'creed', 'macbook.jpg',1),
+('iPad Pro', 'iPad Pro en excellent état, 128 Go', 800.00, 'Électronique', 'Tablette', 'Nice', '06000', 'drago', 'ipad.jpg',1),
+('Apple Watch', 'Apple Watch en excellent état, série 6', 400.00, 'Électronique', 'Montre connectée', 'Bordeaux', '33000', 'rocky', 'applewatch.jpg',1),
+('AirPods Pro', 'AirPods Pro en excellent état, avec boîte', 200.00, 'Électronique', 'Écouteurs', 'Lille', '59000', 'apollo', 'airpods.jpg',1),
+('GoPro Hero 9', 'GoPro Hero 9 en excellent état, avec accessoires', 300.00, 'Électronique', 'Caméra', 'Nantes', '44000', 'creed', 'gopro.jpg',1),
+('Nintendo Switch', 'Nintendo Switch en excellent état, avec jeux', 250.00, 'Électronique', 'Console de jeu', 'Strasbourg', '67000', 'drago', 'switch.jpg',1);
 
 -- Annonces pour Loisirs
-INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image) VALUES 
-('Monopoly', 'Jeu de société Monopoly, complet avec toutes les pièces', 20.00, 'Loisirs', 'Jeux de société', 'Bordeaux', '33000', 'rocky', 'monopoly.jpg'),
-('Ballon de football', 'Ballon officiel taille réglementaire, presque neuf', 15.00, 'Loisirs', 'Jeux de balle', 'Lille', '59000', 'apollo', 'ballon.jpg'),
-('Jeu de pétanque', 'Set complet pour pétanque, idéal pour l été', 25.00, 'Loisirs', 'Jeux de boules', 'Nantes', '44000', 'creed', 'petanque.jpg'),
-('Console de jeux', 'Console de dernière génération en excellent état', 200.00, 'Loisirs', 'Jeux vidéo', 'Strasbourg', '67000', 'drago', 'console.jpg'),
-('Raquettes de tennis', 'Raquettes de tennis en bon état', 30.00, 'Loisirs', 'Sports de raquette', 'Paris', '75001', 'rocky', 'raquettes.jpg'),
-('Vélo de course', 'Vélo de course en aluminium, excellent état', 300.00, 'Loisirs', 'Cyclisme', 'Lyon', '69001', 'apollo', 'velo.jpg'),
-('Tapis de yoga', 'Tapis de yoga en caoutchouc, excellent état', 20.00, 'Loisirs', 'Yoga', 'Marseille', '13001', 'creed', 'tapis.jpg'),
-('Planche de surf', 'Planche de surf en fibre de verre, excellent état', 150.00, 'Loisirs', 'Surf', 'Toulouse', '31000', 'drago', 'surf.jpg');
+INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image, disponible) VALUES 
+('Vélo de course', 'Vélo de course en excellent état, cadre en carbone', 800.00, 'Loisirs', 'Vélo', 'Paris', '75001', 'rocky', 'velo.jpg',1),
+('Tapis de course', 'Tapis de course en excellent état, peu utilisé', 500.00, 'Loisirs', 'Fitness', 'Lyon', '69001', 'apollo', 'tapis.jpg',1),
+('Raquette de tennis', 'Raquette de tennis en excellent état, cordage neuf', 100.00, 'Loisirs', 'Tennis', 'Marseille', '13001', 'creed', 'raquette.jpg',1),
+('Planche de surf', 'Planche de surf en excellent état, peu utilisée', 300.00, 'Loisirs', 'Surf', 'Nice', '06000', 'drago', 'surf.jpg',0),
+('Skateboard', 'Skateboard en excellent état, trucks neufs', 50.00, 'Loisirs', 'Skate', 'Bordeaux', '33000', 'rocky', 'skate.jpg',1),
+('Trottinette électrique', 'Trottinette électrique en excellent état, autonomie 30 km', 300.00, 'Loisirs', 'Trottinette', 'Lille', '59000', 'apollo', 'trottinette.jpg',1),
+('Appareil photo', 'Appareil photo en excellent état, objectif 50 mm', 400.00, 'Loisirs', 'Photographie', 'Nantes', '44000', 'creed', 'appareil.jpg',1),
+('Enceinte Bluetooth', 'Enceinte Bluetooth en excellent état, autonomie 10 h', 50.00, 'Loisirs', 'Audio', 'Strasbourg', '67000', 'drago', 'enceinte.jpg',1);
 
-INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image) VALUES 
-('Service ménage' , 'Service de ménage à domicile', 20.00, 'Autre' , 'Service' , 'Paris', '75001', 'rocky', 'menage.jpg'),
-('Service jardinage' , 'Service de jardinage à domicile', 30.00, 'Autre' , 'Service' , 'Paris', '75001', 'creed', 'jardinage.jpg'),
-('Service bricolage' , 'Service de bricolage à domicile', 25.00, 'Autre' , 'Service' , 'Paris', '75001', 'apollo', 'bricolage.jpg'),
-('Service garde d enfants' , 'Service de garde d enfants à domicile', 15.00, 'Autre' , 'Service' , 'Paris', '75001', 'drago', 'gardeenfants.jpg'),
-('Service repassage' , 'Service de repassage à domicile', 10.00, 'Autre' , 'Service' , 'Paris', '75001', 'rocky', 'repassage.jpg'),
-('Service baby-sitting' , 'Service de baby-sitting à domicile', 20.00, 'Autre' , 'Service' , 'Paris', '75001', 'apollo', 'babysitting.jpg'),
-('Service cours particuliers' , 'Service de cours particuliers à domicile', 25.00, 'Autre' , 'Service' , 'Paris', '75001', 'creed', 'cours.jpg'),
-('Service déménagement' , 'Service de déménagement à domicile', 50.00, 'Autre' , 'Service' , 'Paris', '75001', 'drago', 'demenagement.jpg');
+INSERT INTO annonces (title, content, price, category, sous_category, city, postal_code, author_idname, image, disponible) VALUES 
+('Vélo de course', 'Vélo de course en excellent état, cadre en carbone', 800.00, 'Loisirs', 'Vélo', 'Paris', '75001', 'rocky', 'velo.jpg',1),
+('Tapis de course', 'Tapis de course en excellent état, peu utilisé', 500.00, 'Loisirs', 'Fitness', 'Lyon', '69001', 'apollo', 'tapis.jpg',1),
+('Raquette de tennis', 'Raquette de tennis en excellent état, cordage neuf', 100.00, 'Loisirs', 'Tennis', 'Marseille', '13001', 'creed', 'raquette.jpg',1),
+('Planche de surf', 'Planche de surf en excellent état, peu utilisée', 300.00, 'Loisirs', 'Surf', 'Nice', '06000', 'drago', 'surf.jpg',0),
+('Skateboard', 'Skateboard en excellent état, trucks neufs', 50.00, 'Loisirs', 'Skate', 'Bordeaux', '33000', 'rocky', 'skate.jpg',1),
+('Trottinette électrique', 'Trottinette électrique en excellent état, autonomie 30 km', 300.00, 'Loisirs', 'Trottinette', 'Lille', '59000', 'apollo', 'trottinette.jpg',1),
+('Appareil photo', 'Appareil photo en excellent état, objectif 50 mm', 400.00, 'Loisirs', 'Photographie', 'Nantes', '44000', 'creed', 'appareil.jpg',1),
+('Enceinte Bluetooth', 'Enceinte Bluetooth en excellent état, autonomie 10 h', 50.00, 'Loisirs', 'Audio', 'Strasbourg', '67000', 'drago', 'enceinte.jpg',1);
+

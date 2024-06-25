@@ -23,6 +23,8 @@ function Message({ userId, handleClose, userDestId }) {
               handleSelectConversation(conversation.conversation_id);
               setUserDestIdName(userDestId);
               infoDest(userDestId);
+            } else {
+              createNewConversation(userId, userDestId);
             }
           }
         })
@@ -51,6 +53,36 @@ function Message({ userId, handleClose, userDestId }) {
       .catch((error) => console.error("Erreur lors de la récupération des informations", error));
   };
 
+  const createNewConversation = (creatorId, receiverId) => {
+    fetch(`http://localhost:3001/conversations/last`)
+      .then((response) => response.json())
+      .then((data) => {
+        const newConversationId = data.length > 0 ? data[0].conversation_id + 1 : 1;
+        const newConversation = {
+          conversation_id: newConversationId,
+          creator_idname: creatorId,
+          receiver_idname: receiverId,
+          title: receiverId,
+        };
+
+        fetch(`http://localhost:3001/conversations`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newConversation),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          setConversations((prev) => [...prev, newConversation]);
+          handleSelectConversation(newConversationId);
+          envoyerMessage(newConversationId, creatorId, receiverId, "Pouvez-vous me prêter votre outil");
+        })
+        .catch((error) => console.error("Erreur lors de la création de la conversation", error));
+      })
+      .catch((error) => console.error("Erreur lors de la récupération de la dernière conversation", error));
+  };
+
   const envoyerMessage = (conversationId, envoyeur, destinataire, messageText) => {
     const newMessage = {
       user_idname: envoyeur,
@@ -68,23 +100,22 @@ function Message({ userId, handleClose, userDestId }) {
 
     setMessage("");
 
-    fetch(`http://localhost:3001/envoyerMessage`, {
+    fetch(`http://localhost:3001/conversations/${conversationId}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        conversationId,
-        envoyeur,
-        destinataire,
-        messageText,
+        user_idname: envoyeur,
+        user_dest_idname: destinataire,
+        message: messageText,
       }),
     })
-      .then((response) => response.json())
-      .then((newMessageFromServer) => {
-        // Mettre à jour l'état avec le message provenant du serveur si nécessaire
-      })
-      .catch((error) => console.error("Erreur lors de l'envoi du message", error));
+    .then((response) => response.json())
+    .then((newMessageFromServer) => {
+      // Mettre à jour l'état avec le message provenant du serveur si nécessaire
+    })
+    .catch((error) => console.error("Erreur lors de l'envoi du message", error));
   };
 
   const resetStates = () => {
@@ -106,7 +137,7 @@ function Message({ userId, handleClose, userDestId }) {
   return (
     <div className="arriere_plan_message">
       <div className="message_container">
-      <button
+        <button
           id="fermeture"
           onClick={() => {
             handleClose();

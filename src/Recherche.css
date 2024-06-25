@@ -1,15 +1,16 @@
-.recherche_container{
-    position : fixed ;
+.recherche_container {
+    position: fixed;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
     width: 70%;
     height: 70%;
     z-index: 99;
-    margin-left: 250px;
     border-radius: 2%;
     overflow-y: auto;
-
+    top: 50%; /* Centrer verticalement */
+    left: 50%; /* Centrer horizontalement */
+    transform: translate(-50%, -50%); /* Centrage précis */
 }
 
 .arriere_plan_recherche {
@@ -25,6 +26,26 @@
     z-index: 2;
 }
 
-.annonce-recherche{
+.annonce-recherche {
     border: 1px solid black;
+    margin-bottom: 10px; /* Espace entre les annonces */
+    padding: 10px; /* Espacement interne */
+}
+
+/* Media queries pour le responsive design */
+
+@media (max-width: 768px) {
+    .recherche_container {
+        width: 90%;
+        height: 90%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .recherche_container {
+        width: 95%;
+        height: 95%;
+    }
 }

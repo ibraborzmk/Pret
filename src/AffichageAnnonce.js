@@ -13,10 +13,19 @@ function handleImageErrorPP(event) {
   event.target.src = imagePP;
 }
 
+
 function AffichageAnnonce({ annonce, onClose }) {
   const { userId } = useContext(AuthContext);
   const [showMessageAnnonce, setShowMessageAnnonce] = useState(false);
   console.log('image', annonce.image);
+  let dispo;
+  console.log("annonce", annonce);
+  if (annonce.disponible === 1) {
+    dispo = "Disponible"
+  }
+  else {
+    dispo = "Non disponible"
+  }
   const toggleMessage = () => {
     setShowMessageAnnonce(!showMessageAnnonce);
     console.log("userId", userId);
@@ -25,6 +34,7 @@ function AffichageAnnonce({ annonce, onClose }) {
   useEffect(() => {
     console.log("showMessageAnnonce", showMessageAnnonce);
   }, [showMessageAnnonce]);
+
 
   return (
     <div className="arriere_plan">
@@ -35,16 +45,19 @@ function AffichageAnnonce({ annonce, onClose }) {
             <p>{annonce.title}</p>
             <p>{annonce.price} €</p>
           </div>
-          <div className="location">
-            <p>{annonce.city}, {annonce.postal_code}</p>
-          </div>
           <div className="description2">
             <p>{annonce.content}</p>
+            <p>{annonce.date}</p>
+            <p>{dispo}</p>
+            <p>{annonce.disponible}</p>
+          </div>
+          <div className="location">
+            <p>{annonce.city}, {annonce.postal_code}</p>
           </div>
         </div>
         <div className="image-container-affichage">
           <img
-            src={annonce.image || imageError}
+            src={`../public/uploads/${annonce.image}`}
             alt={annonce.title}
             id="image-annonce-affichage"
             onError={handleImageError}
